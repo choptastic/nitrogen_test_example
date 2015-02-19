@@ -95,7 +95,9 @@ test_main() ->
 	main().
 
 tests() ->
+	SampleName = "My Test " ++ wf:to_list(crypto:rand_uniform(1, 9999999)),
 	?wf_test_auto(open_add, test_add_open()),
+	?wf_test_auto(test_set_name,test_set_name(SampleName)),
 	ok.
 
 test_add_open() ->
@@ -103,4 +105,10 @@ test_add_open() ->
 		fun() -> wf:wire(add, #click{}) end,
 		fun() -> wf:q(name) == "" end,
 		[{delay, 200}]
+	}.
+
+test_set_name(SampleName) ->
+	{
+		fun() -> wf:set(name, SampleName) end,
+		fun() -> wf:q(name) == SampleName end
 	}.
