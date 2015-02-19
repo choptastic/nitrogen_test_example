@@ -16,7 +16,7 @@ my_games() ->
 	Games = db_collection:list(),
 	[
 		#h3{text="My games"},
-		#button{id=add, text="Add Game to Collection", postback=add},
+		#button{id=add, text="Add Game to Collection", postback=addd},
 		draw_games(Games)
 	].
 
@@ -86,7 +86,6 @@ event({save, ID}) ->
 event(redraw_list) ->
 	redraw_list().
 	
-
 
 
 %%%%%%%% TESTS %%%%%%%%%%%%
