@@ -86,4 +86,13 @@ event({save, ID}) ->
 event(redraw_list) ->
 	redraw_list().
 	
-	
+
+
+
+%%%%%%%% TESTS %%%%%%%%%%%%
+
+test_main() ->
+	wf_test:start(fun tests/0).
+
+tests() ->
+	ok.
