@@ -16,7 +16,7 @@ my_games() ->
 	Games = db_collection:list(),
 	[
 		#h3{text="My games"},
-		#button{text="Add Game to Collection", postback=add},
+		#button{id=add, text="Add Game to Collection", postback=add},
 		draw_games(Games)
 	].
 
@@ -92,7 +92,16 @@ event(redraw_list) ->
 %%%%%%%% TESTS %%%%%%%%%%%%
 
 test_main() ->
-	wf_test:start(fun tests/0).
+	wf_test:start(fun tests/0),
+	main().
 
 tests() ->
+	?wf_test_auto(open_add, test_add_open()),
 	ok.
+
+test_add_open() ->
+	{
+		fun() -> wf:wire(add, #click{}) end,
+		fun() -> wf:q(name) == "" end,
+		[{delay, 200}]
+	}.
