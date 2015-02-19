@@ -3,7 +3,14 @@
 -compile(export_all).
 
 main() ->
-	wf_test:start_other(index, fun tests/0).
+	wf_test:start(fun tests/0),
+	index:main().
+
+title() -> index:title().
+
+body() -> index:body().
 
 tests() ->
 	ok.
+
+event(E) -> index:event(E).
