@@ -100,6 +100,7 @@ tests() ->
 	?wf_test_auto(open_add, test_add_open()),
 	?wf_test_auto(test_set_name,test_set_name(SampleName)),
 	?wf_test_manual(save, test_save(SampleName)),
+	?wf_test_js(test_save_exists, test_save_exists(SampleName)),
 	ok.
 
 test_add_open() ->
@@ -119,4 +120,11 @@ test_save(SampleName) ->
 	{
 		fun() -> wf:wire(save, #click{}) end,
 		fun() -> SampleName == wf:q(name) end
+	}.
+
+test_save_exists(SampleName) ->
+	{
+		undefined, %% Nothing needed to setup
+		"return $(\".tablecell:contains('" ++ SampleName ++ "')\").text()",
+		fun([FoundName]) -> SampleName == FoundName end
 	}.
