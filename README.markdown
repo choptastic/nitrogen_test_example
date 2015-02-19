@@ -25,6 +25,7 @@ Then open your browser to http://127.0.0.1:8000
 ## Different Tags demonstrate progress along the way
 
 * `no-tests` - there are no tests at this point, just a bare, but working application
+* `skeleton` - Basic test skeleton in place with configuration
 * `basic-tests` - first set of tests
 
 
