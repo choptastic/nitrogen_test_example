@@ -16,7 +16,7 @@ my_games() ->
 	Games = db_collection:list(),
 	[
 		#h3{text="My games"},
-		#button{id=add, text="Add Game to Collection", postback=addd},
+		#button{id=add, text="Add Game to Collection", postback=add},
 		draw_games(Games)
 	].
 
