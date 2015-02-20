@@ -4,7 +4,6 @@ This application goes alone with the Talk given at Chicago Erlang User Group on 
 
 Talk Info: http://www.meetup.com/ErlangChicago/events/220276271/
 Slides: http://slides.sigma-star.com
-Video: (not uploaded yet)
 
 ## Installation
 
@@ -22,12 +21,24 @@ bin/nitrogen console
 
 Then open your browser to http://127.0.0.1:8000
 
-## Different Tags demonstrate progress along the way
+## To run the test page
 
-* `no-tests` - there are no tests at this point, just a bare, but working application
-* `skeleton` - Basic test skeleton in place with configuration
-* `basic-tests` - first set of tests
+Open up http://127.0.0.1:8000/index.test
 
+## To run the full test suite
+
+First edit the browser you wish to test in `etc/app.config`, then restart the VM:
+
+```
+> q().
+$ nitrogen console
+```
+
+Then on the newly spawned Erlang console:
+
+```erlang
+wf_test:start_all(nitrogen).
+```
 
 # License
 

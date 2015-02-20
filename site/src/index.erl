@@ -102,13 +102,13 @@ tests() ->
 	?wf_test_manual(save, test_save(SampleName)),
 	?wf_test_js(test_save_exists, test_save_exists(SampleName)),
 	?wf_test_js(test_delete, test_delete(SampleName)),
-	ok.
+ 	ok.
 
 test_add_open() ->
 	{
-		fun() -> wf:wire(add, #click{}) end,
-		fun() -> wf:q(name) == "" end,
-		[{delay, 200}]
+		fun() -> wf:wire(add, #click{}) end, %%setup
+		fun() -> wf:q(name) == "" end,%% Assertion
+		[{delay, 200}] %% We delay because the click takes some time to use
 	}.
 
 test_set_name(SampleName) ->
@@ -132,8 +132,9 @@ test_save_exists(SampleName) ->
 
 test_delete(SampleName) ->
 	MainSelector = "\".tablecell:contains('" ++ SampleName ++ "')\"",
+	JS = wf:f("$(~s).siblings().find('input[value=Delete]').click()", [MainSelector]),
 	{
-		fun() -> wf:wire("$(" ++ MainSelector ++ ").siblings().find('input[value=Delete]').click()") end,
+		fun() -> wf:wire(JS) end,
 		"return $(" ++ MainSelector ++ ").text()",
 		fun([""]) -> true end,
 		[{delay, 200}]
